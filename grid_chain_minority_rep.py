@@ -128,12 +128,27 @@ def step_num(partition):
         return 0
     return parent["step_num"] + 1
 
+def rook_cut_edges(partition):
+    cut_edge_set = set()
+    assign = partition.assignment
+    for vertex in graph.nodes():
+        if vertex[0]<n-1:
+            neighbor = (vertex[0]+1,vertex[1])
+            if assign[vertex]!=assign[neighbor]:
+                cut_edge_set.add((vertex,neighbor))
+        if vertex[1]<n-1:
+            neighbor = (vertex[0],vertex[1]+1)
+            if assign[vertex]!=assign[neighbor]:
+                cut_edge_set.add((vertex,neighbor))
+    return cut_edge_set
+
 
 updaters = {
     "population": Tally("population"),
     "cut_edges": cut_edges,
     "step_num": step_num,
     "Pink-Purple": Election("Pink-Purple", {"Pink": "pink", "Purple": "purple"}),
+    "rook_cut_edges": rook_cut_edges
 }
 
 
