@@ -49,6 +49,8 @@ graph = nx.grid_graph([n,n])
 #            graph[(i,j)][(i+1,j-1)]["shared_perim"]=0
 
 
+
+
 # Initialization steps
 for vertex in graph.nodes():
     # Set each vertex in the graph to have population 1
@@ -56,15 +58,15 @@ for vertex in graph.nodes():
  
     # Seteach vertex as a minority (pink) or majority (purple) voter
     # For different voter distributions, change here: 
-    if vertex[0] < rho*n:
-        graph.node[vertex]["pink"] = 1
-        graph.node[vertex]["purple"] = 0
-    else:
-        graph.node[vertex]["pink"] = 0
-        graph.node[vertex]["purple"] = 1
+#    if vertex[0] < rho*n:
+#        graph.node[vertex]["pink"] = 1
+#        graph.node[vertex]["purple"] = 0
+#    else:
+#        graph.node[vertex]["pink"] = 0
+#        graph.node[vertex]["purple"] = 1
 
      #Set each node to be minority or majority with probability 0.4
-     # WIll not necessarily result in exactly 40 minority nodes
+     # WILL NOT necessarily result in exactly 40 minority nodes
 #     p = 0.4
 #    if random.random() < p:
 #        graph.node[n]["pink"] = 1
@@ -73,6 +75,15 @@ for vertex in graph.nodes():
 #        graph.node[n]["pink"] = 0
 #        graph.node[n]["purple"] = 1
      
+     # The voter configuration called Henry
+     # For 10 x 10 grid
+    Henry = [[1,1,0,0,0,0,0,0,1,1],[1,1,1,1,1,1,1,1,1,0],[0,1,0,0,0,1,1,1,0,0],[1,0,0,1,1,0,0,0,1,1],[0,0,1,1,1,1,1,0,1,0],[0,1,1,1,0,1,1,1,1,0],[0,1,0,0,0,1,0,1,1,1],[0,1,0,1,1,1,1,1,1,0],[0,1,1,1,0,0,1,1,1,0],[1,1,1,0,1,1,1,1,0,0]]
+    if Henry[9-vertex[1]][vertex[0]] == 0:
+        graph.node[vertex]["pink"] = 1
+        graph.node[vertex]["purple"] = 0
+    else:
+        graph.node[vertex]["pink"] = 0
+        graph.node[vertex]["purple"] = 1    
 
 
 
